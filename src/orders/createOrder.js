@@ -21,19 +21,26 @@ export class CreateOrder extends Component {
         this.props.items.forEach(item => {
             console.log(item.name);
 
-            if(document.getElementById(item.name).innerHTML === "1"){
-                let itemForNewOrder={
-                    name: item.name,
-                    quantity: document.getElementsByClassName(item.name)[0].value
+            if(document.getElementsByClassName(item.name)[0].value <= item.quantity){
+                document.getElementsByClassName("outOfStock")[0].style.display= "none";
+                if(document.getElementById(item.name).innerHTML === "1"){
+                    let itemForNewOrder={
+                        name: item.name,
+                        quantity: document.getElementsByClassName(item.name)[0].value
+                    }
+    
+                    this.state.items.push(itemForNewOrder);
                 }
-
-                this.state.items.push(itemForNewOrder);
             }
+            else {
+                document.getElementsByClassName("outOfStock")[0].style.display= "block";
+            }
+            
         });
 
         console.log(this.state.items);
-        this.state.items.splice(0);
-        console.log(this.state.items);
+        // this.state.items.splice(0);
+        // console.log(this.state.items);
     }
 
     render() {
@@ -59,6 +66,9 @@ export class CreateOrder extends Component {
                         }
                     </tbody>    
                 </table>
+                <div className="red-text center outOfStock">
+                    Some orders you are trying to order is more than the availability! 
+                </div>
                 <button className="btn-small right" type="button" name="action" onClick= { this.executeOrder.bind(this) }>Submit
                     <i className="material-icons right">send</i>
                 </button>
