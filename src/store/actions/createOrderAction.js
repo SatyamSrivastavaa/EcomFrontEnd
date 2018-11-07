@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const CreateOrder = (order) => {
-    var request = axios.post('link to create order', order, {
+export const CreateOrder = (order, id) => {
+    var request = axios.post('http://localhost:3000/api/orders?access_token=' + id, order, {
         headers: { 'Content-Type': 'application/json' } 
     });
 
@@ -17,8 +17,8 @@ export const CreateOrder = (order) => {
     }
 };
 
-export function FetchAvailableItems() {
-    var request = axios.get('https://api.myjson.com/bins/1g1bxa');
+export function FetchAvailableItems(id) {
+    var request = axios.get('http://localhost:3000/api/ItemsInStocks?access_token=' + id);
 
     return (dispatch) => {
         request.then(
@@ -32,8 +32,9 @@ export function FetchAvailableItems() {
     }
 }
 
-export function FetchOrders() {
-    var request = axios.get('https://api.myjson.com/bins/18g8wm');
+export function FetchOrders(id) {
+    var request = axios.get('http://localhost:3000/api/orders?access_token=' + id);
+    
 
     return (dispatch) => {
         request.then(

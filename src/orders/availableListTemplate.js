@@ -15,7 +15,7 @@ export class AvailableListForCreateOrder extends Component {
         return (
             <tr>
                 <td>{ item.name }</td>
-                <td>{ item.quantity }</td>
+                <td>{ item.qty }</td>
                 <td>
                     <input type="number" min="0" className= { item.name } />
                 </td>

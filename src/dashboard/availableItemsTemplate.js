@@ -4,7 +4,7 @@ const Available = ({ item }) => {
     return (
         <tr>
             <td>{ item.name }</td>
-            <td>{ item.quantity }</td>
+            <td>{ item.qty }</td>
         </tr>
     )
 }

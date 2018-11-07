@@ -1,7 +1,31 @@
 import React, { Component } from 'react';
+import { SignIn } from '../store/actions/authActions';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-export class SignIn extends Component {
+export class SignInComponent extends Component {
+
+    state= {
+     email: "",
+     password: ""   
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state);
+        this.props.signIn(this.state);
+    }
+
     render() {
+        const { auth }= this.props;
+
+        if(!auth.id){
             return (
                 <div className="container">
                     <form onSubmit={this.handleSubmit} className="white">
@@ -23,7 +47,23 @@ export class SignIn extends Component {
                     </form>
                 </div>
             )
+        }
+        else{
+            return <Redirect to='/home' />
+        }
     }
 }
 
-export default SignIn;
+const mapStateToProps= (state) => {
+    return {
+        auth: state.auth
+    }
+}
+
+const mapDispatchToProps= (dispatch) => {
+    return {
+        signIn: (body) => dispatch(SignIn(body))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInComponent);

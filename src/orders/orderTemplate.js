@@ -8,7 +8,7 @@ const OrderList = ({ order }) => {
                     return (
                         <tr key={ id }>
                             <td>{ item.name }</td>
-                            <td>{ item.quantity }</td>
+                            <td>{ item.qty }</td>
                         </tr>
                     )
                 })
